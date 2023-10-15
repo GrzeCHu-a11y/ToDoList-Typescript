@@ -1,0 +1,12 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    margin: 0 auto;
+    margin-top: 10vh;
+    width: 500px;
+    height: 500px;
+    border: 1px solid black;
+}
