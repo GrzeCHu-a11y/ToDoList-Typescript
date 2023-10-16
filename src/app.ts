@@ -18,11 +18,22 @@ function render() {
         ul.appendChild(li)
 
         const taskButton: HTMLButtonElement = document.createElement("button");
-        taskButton.classList.add("task-button")
-        taskButton.setAttribute("index", `${id}`)
-        li.appendChild(taskButton);
 
+        taskButton.classList.add("task-button")
+        li.appendChild(taskButton);
         taskButton.innerText = task.completed ? "complete" : "uncomplete";
+
+        const deleteTaskButton: HTMLButtonElement = document.createElement("button");
+        deleteTaskButton.classList.add("delete-button")
+        deleteTaskButton.setAttribute("index", `${id}`)
+        deleteTaskButton.innerText = "delete";
+        li.appendChild(deleteTaskButton)
+        deleteTaskButton.addEventListener("click", (e) => {
+            e.preventDefault()
+            tasks.splice(id, 1)
+            render()
+        })
+
         taskButton.addEventListener("click", (e) => {
             e.preventDefault()
             if(task.completed === true) {
@@ -39,20 +50,12 @@ function render() {
 
 function addTask(e: any) {
     e.preventDefault();
-    tasks.push({name: input.value, completed: false})
+    if (input.value != "") {
+        tasks.push({name: input.value, completed: false})
+    } else alert("input is empty")
     render()
 }
 
-
-
-
-
-
-
 button.addEventListener("click", addTask) 
    
-
-
-
-
 render()
